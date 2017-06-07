@@ -5,8 +5,86 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TempoLogger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="486.385" Width="640">
     <Grid>
-        
+        <ListView Name="logs" BorderThickness="1"
+                  HorizontalContentAlignment="Left"
+                  Margin="10,72,10,10" SelectionMode="Single" 
+                  BorderBrush="Transparent"
+                  Foreground="#15619D" FontSize="14" RenderTransformOrigin="0.5,0.5">
+            <ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.117"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.409"/>
+                </TransformGroup>
+            </ListView.RenderTransform>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Resources>
+                        <LinearGradientBrush x:Key="ListItemHoverFill" 
+                                             EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF1FBFF" Offset="0"/>
+                            <GradientStop Color="DarkBlue" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Style.Resources>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border CornerRadius="2" SnapsToDevicePixels="True"  
+                                BorderThickness="{TemplateBinding BorderThickness}"   
+                                BorderBrush="{TemplateBinding BorderBrush}"   
+                                Background="{TemplateBinding Background}">
+                                    <Border Name="InnerBorder" CornerRadius="1" BorderThickness="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition MaxHeight="11" />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <Rectangle Name="UpperHighlight" Visibility="Collapsed" Fill="#75FFFFFF" />
+                                            <GridViewRowPresenter Grid.RowSpan="2"   
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"   
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        </Grid>
+                                    </Border>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#15619D" />
+                                        <Setter Property="BorderBrush" Value="#15619D" />
+                                        <Setter Property="Foreground" Value="White"></Setter>
+
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#15619D" />
+                                        <Setter Property="BorderBrush" Value="#15619D" />
+                                        <Setter Property="Foreground" Value="White"></Setter>
+
+                                    </Trigger>
+
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Foreground" 
+                                                Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Issue" Width="50" DisplayMemberBinding="{Binding Issue}" />
+                    <GridViewColumn Header="Title" Width="380" DisplayMemberBinding="{Binding Title}" />
+                    <GridViewColumn Header="From" Width="50" DisplayMemberBinding="{Binding From}" />
+                    <GridViewColumn Header="To" Width="50" DisplayMemberBinding="{Binding To}" />
+                    <GridViewColumn Header="Duration" Width="70" DisplayMemberBinding="{Binding Duration}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
