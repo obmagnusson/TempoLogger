@@ -35,6 +35,7 @@ namespace TempoLogger
 				{
 					Issue = "AB-123",
 					Title = "Test issue",
+					Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 					From = "13:00",
 					To = "14:00",
 					Duration = "1h"
@@ -43,6 +44,7 @@ namespace TempoLogger
 				{
 					Issue = "AB-123",
 					Title = "Test issue",
+					Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 					From = "13:00",
 					To = "14:00",
 					Duration = "1h"
@@ -51,6 +53,7 @@ namespace TempoLogger
 				{
 					Issue = "AB-123",
 					Title = "Test issue",
+					Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 					From = "13:00",
 					To = "14:00",
 					Duration = "1h"
@@ -59,6 +62,7 @@ namespace TempoLogger
 				{
 					Issue = "AB-123",
 					Title = "Test issue",
+					Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 					From = "13:00",
 					To = "14:00",
 					Duration = "1h"

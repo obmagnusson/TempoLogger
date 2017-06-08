@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TempoLogger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="517.385" Width="640">
+        Title="MainWindow" Height="517.385" Width="716">
 	<Grid>
 		<ListView Name="logs" BorderThickness="1"
                   HorizontalContentAlignment="Left"
@@ -79,14 +79,26 @@
 			<ListView.View>
 				<GridView>
 					<GridViewColumn Header="Issue" Width="50" DisplayMemberBinding="{Binding Issue}" />
-					<GridViewColumn Header="Title" Width="374" DisplayMemberBinding="{Binding Title}" />
+					<GridViewColumn Header="Title" Width="200" DisplayMemberBinding="{Binding Title}" />
+					<GridViewColumn Header="Comment"
+						Width="250">
+
+
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<TextBlock
+									TextWrapping="Wrap" Text="{Binding Comment}"/>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
 					<GridViewColumn Header="From" Width="50" DisplayMemberBinding="{Binding From}" />
 					<GridViewColumn Header="To" Width="50" DisplayMemberBinding="{Binding To}" />
 					<GridViewColumn Header="Duration" Width="70" DisplayMemberBinding="{Binding Duration}" />
+
 				</GridView>
 			</ListView.View>
 		</ListView>
-		<Label Content="Total:" HorizontalAlignment="Left" Margin="504,0,0,15" VerticalAlignment="Bottom" Width="47" FontSize="16"/>
-		<Label Name="CurrentDayTotal" Content="30h 30m" HorizontalAlignment="Left" Margin="552,0,0,15" VerticalAlignment="Bottom" Width="70" FontSize="16"/>
+		<Label Content="Total:" Margin="0,0,81,12" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Width="47" FontSize="16"/>
+		<Label Name="CurrentDayTotal" Content="30h 30m" Margin="628,0,10,12" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="16"/>
 	</Grid>
 </Window>
