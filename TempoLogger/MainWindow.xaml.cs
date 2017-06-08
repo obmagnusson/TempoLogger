@@ -23,55 +23,19 @@ namespace TempoLogger
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private readonly List<WorkLog> _logs;
-
+		private readonly WorkLogRepository _repo;
+		private List<WorkLog> _logs;
+		private DateTime _selectedDate;
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			_logs = new List<WorkLog>
-			{
-				new WorkLog
-				{
-					Issue = "AB-123",
-					Title = "Test issue",
-					Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
-					From = "13:00",
-					To = "14:00",
-					Duration = "1h"
-				},
-				new WorkLog
-				{
-					Issue = "AB-123",
-					Title = "Test issue",
-					Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
-					From = "13:00",
-					To = "14:00",
-					Duration = "1h"
-				},
-				new WorkLog
-				{
-					Issue = "AB-123",
-					Title = "Test issue",
-					Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
-					From = "13:00",
-					To = "14:00",
-					Duration = "1h"
-				},
-				new WorkLog
-				{
-					Issue = "AB-123",
-					Title = "Test issue",
-					Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
-					From = "13:00",
-					To = "14:00",
-					Duration = "1h"
-				},
-			};
+			_selectedDate = DateTime.Now;
+			_repo = new WorkLogRepository();
 
-			logs.ItemsSource = _logs;
+			LoadSelectedDay();
 
-			CurrentDayTotal.Content = "0";
+			lblCurrentDayTotal.Content = "0";
 			CalculateDayTotal();
 		}
 
@@ -86,8 +50,33 @@ namespace TempoLogger
 				totalSeconds += log.GetDurationSeconds();
 			}
 
-			CurrentDayTotal.Content = WorkLogHelper.SecondsToString(totalSeconds);
+			lblCurrentDayTotal.Content = WorkLogHelper.SecondsToString(totalSeconds);
 		}
 
+		private void btnPrev_Click(object sender, RoutedEventArgs e)
+		{
+			_selectedDate = _selectedDate.AddDays(-1);
+			LoadSelectedDay();
+		}
+
+		private void btnToday_Click(object sender, RoutedEventArgs e)
+		{
+			_selectedDate = DateTime.Now;
+			LoadSelectedDay();
+		}
+
+		private void btnNext_Click(object sender, RoutedEventArgs e)
+		{
+			_selectedDate = _selectedDate.AddDays(+1);
+			LoadSelectedDay();
+		}
+
+		private void LoadSelectedDay()
+		{
+			_logs = _repo.GetByDate(_selectedDate);
+			logs.ItemsSource = _logs;
+			CalculateDayTotal();
+			lblDate.Content = _selectedDate.ToString("d.M.yyyy");
+		}
 	}
 }
