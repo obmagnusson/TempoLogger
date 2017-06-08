@@ -2,7 +2,7 @@
 
 namespace TempoLogger.Models
 {
-	class WorkLog
+	public class WorkLog
 	{
 		public string Issue { get; set; }
 		public string Title { get; set; }
