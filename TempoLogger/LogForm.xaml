@@ -14,13 +14,13 @@
 		<DatePicker Name="DpDate" HorizontalAlignment="Left" Margin="13,86,0,0" VerticalAlignment="Top" FontSize="16" Width="130"/>
 
 		<Label Content="Start" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.003,0.262"  FontSize="16"/>
-		<TextBox Name="TxtStart" HorizontalAlignment="Left" Height="23" Margin="13,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" FontSize="16"/>
+		<TextBox Name="TxtStart" HorizontalAlignment="Left" Height="23" Margin="13,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" FontSize="16" LostFocus="TxtStart_LostFocus"/>
 
 		<Label Content="End" HorizontalAlignment="Left" Margin="75,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.003,0.262" FontSize="16"/>
-		<TextBox Name="TxtEnd" HorizontalAlignment="Left" Height="23" Margin="78,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" FontSize="16"/>
+		<TextBox Name="TxtEnd" HorizontalAlignment="Left" Height="23" Margin="78,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="51" FontSize="16"  LostFocus="TxtEnd_LostFocus"/>
 
 		<Label Content="Duration" HorizontalAlignment="Left" Margin="139,121,0,0" VerticalAlignment="Top" FontSize="16"/>
-		<TextBox Name="TxtDuration" HorizontalAlignment="Left" Height="23" Margin="142,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68" FontSize="16" IsEnabled="True"/>
+		<TextBox Name="TxtDuration" HorizontalAlignment="Left" Height="23" Margin="142,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68" FontSize="16" IsEnabled="False"/>
 
 		<Label Content="Comment" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.618,1.485" FontSize="16" Height="31"/>
 		<TextBox Name="TxtComment" HorizontalAlignment="Center" Height="114" Margin="13,202,13,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="258" FontSize="16"/>
