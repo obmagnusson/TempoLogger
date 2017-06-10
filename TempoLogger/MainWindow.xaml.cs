@@ -35,7 +35,7 @@ namespace TempoLogger
 
 			LoadSelectedDay();
 
-			lblCurrentDayTotal.Content = "0";
+			LblCurrentDayTotal.Content = "0";
 			CalculateDayTotal();
 		}
 
@@ -50,33 +50,62 @@ namespace TempoLogger
 				totalSeconds += log.GetDurationSeconds();
 			}
 
-			lblCurrentDayTotal.Content = WorkLogHelper.SecondsToString(totalSeconds);
+			LblCurrentDayTotal.Content = WorkLogHelper.SecondsToString(totalSeconds);
 		}
 
-		private void btnPrev_Click(object sender, RoutedEventArgs e)
+		/// <summary>
+		/// Goes back a day
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnPrev_Click(object sender, RoutedEventArgs e)
 		{
 			_selectedDate = _selectedDate.AddDays(-1);
 			LoadSelectedDay();
 		}
 
-		private void btnToday_Click(object sender, RoutedEventArgs e)
+		/// <summary>
+		/// Go to todays date
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnToday_Click(object sender, RoutedEventArgs e)
 		{
 			_selectedDate = DateTime.Now;
 			LoadSelectedDay();
 		}
 
-		private void btnNext_Click(object sender, RoutedEventArgs e)
+		/// <summary>
+		/// Go forward a day
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnNext_Click(object sender, RoutedEventArgs e)
 		{
 			_selectedDate = _selectedDate.AddDays(+1);
 			LoadSelectedDay();
 		}
 
+		/// <summary>
+		/// Fetches the selected day's logs and sets them as the item source of listview.
+		/// </summary>
 		private void LoadSelectedDay()
 		{
 			_logs = _repo.GetByDate(_selectedDate);
 			logs.ItemsSource = _logs;
 			CalculateDayTotal();
-			lblDate.Content = _selectedDate.ToString("d.M.yyyy");
+			LblDate.Content = _selectedDate.ToString("d.M.yyyy");
+		}
+
+		/// <summary>
+		/// Opens a log form to create a new log
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnNewLog_Click(object sender, RoutedEventArgs e)
+		{
+			var logform = new LogForm();
+			logform.ShowDialog();
 		}
 	}
 }

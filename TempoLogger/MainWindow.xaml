@@ -103,10 +103,11 @@
 			</ListView.View>
 		</ListView>
 		<Label Content="Total:" Margin="0,0,80,12" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Width="47" FontSize="16"/>
-		<Label Name="lblCurrentDayTotal" Content="30m" Margin="628,0,10,12" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="16"/>
-		<Button Name="btnPrev" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" Width="40" Click="btnPrev_Click"/>
-		<Button Name="btnToday" Content="Today" HorizontalAlignment="Left" Margin="55,19,0,0" VerticalAlignment="Top" Width="75" Click="btnToday_Click"/>
-		<Button Name="btnNext" Content="&gt;&gt;" HorizontalAlignment="Left" Margin="135,19,0,0" VerticalAlignment="Top" Width="40" Click="btnNext_Click"/>
-		<Label Name="lblDate"  Content="Label" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="16"/>
+		<Label Name="LblCurrentDayTotal" Content="30m" Margin="628,0,10,12" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="16"/>
+		<Button Name="BtnPrev" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" Width="40" Click="BtnPrev_Click"/>
+		<Button Name="BtnToday" Content="Today" HorizontalAlignment="Left" Margin="55,19,0,0" VerticalAlignment="Top" Width="75" Click="BtnToday_Click"/>
+		<Button Name="BtnNext" Content="&gt;&gt;" HorizontalAlignment="Left" Margin="135,19,0,0" VerticalAlignment="Top" Width="40" Click="BtnNext_Click"/>
+		<Label Name="LblDate"  Content="Label" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="16"/>
+		<Button Name="BtnNewLog" Content="New Log" HorizontalAlignment="Left" Margin="616,19,0,0" VerticalAlignment="Top" Width="75" Click="BtnNewLog_Click"/>
 	</Grid>
 </Window>
