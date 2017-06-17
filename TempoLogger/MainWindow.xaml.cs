@@ -117,13 +117,58 @@ namespace TempoLogger
 		private void ListViewItem_DoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			var workLog = ((ListViewItem)sender).Content as WorkLog;
-			
+			EditHelper(workLog);
+		}
+
+		/// <summary>
+		/// Opens a new LogForm window dialog to edit log that was double clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnEditLog_Click(object sender, RoutedEventArgs e)
+		{
+			var workLog = Logs.SelectedItem as WorkLog;
+			EditHelper(workLog);
+		}
+
+		/// <summary>
+		/// Opens edit dialog
+		/// </summary>
+		/// <param name="workLog"></param>
+		private void EditHelper(WorkLog workLog)
+		{
 			var logform = new LogForm(workLog);
 			var success = logform.ShowDialog() ?? false;
 
 			if (!success) return;
 			LoadSelectedDay();
 			_repo.Save();
+		}
+
+		/// <summary>
+		/// Deletes a log
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnDeleteLog_Click(object sender, RoutedEventArgs e)
+		{
+			var messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButton.YesNo);
+
+			if (messageBoxResult != MessageBoxResult.Yes) return;
+			var workLog = Logs.SelectedItem as WorkLog;
+			_repo.Delete(workLog);
+			_repo.Save();
+			LoadSelectedDay();
+		}
+
+		/// <summary>
+		/// Trick to unselect
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Logs_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			Logs.UnselectAll();
 		}
 
 		//private void ListViewItem_RightClick(object sender, MouseButtonEventArgs e)

@@ -37,6 +37,11 @@ namespace TempoLogger
 			_logs.Add(entity);
 		}
 
+		public void Delete(WorkLog entity)
+		{
+			_logs.Remove(entity);
+		}
+
 		/// <summary>
 		/// Saves the list of logs to file
 		/// </summary>
@@ -54,5 +59,6 @@ namespace TempoLogger
 			// Close the writer
 			writer.Close();
 		}
+
 	}
 }

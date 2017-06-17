@@ -5,16 +5,17 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:TempoLogger"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="517.385" Width="716">
+		Title="MainWindow" Height="517.385" Width="801
+		">
 
 
 
 	<Grid>
 		<ListView Name="Logs" BorderThickness="1"
 					HorizontalContentAlignment="Left"
-					Margin="10,51,10,52" SelectionMode="Single" 
+					Margin="10,51,95,52" SelectionMode="Single" 
 					BorderBrush="Transparent"
-					Foreground="#15619D" FontSize="14" RenderTransformOrigin="0.5,0.5">
+					Foreground="#15619D" FontSize="14" RenderTransformOrigin="0.5,0.5" MouseDown="Logs_MouseDown">
 			<ListView.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform/>
@@ -116,6 +117,36 @@
 		<Button Name="BtnToday" Content="Today" HorizontalAlignment="Left" Margin="55,19,0,0" VerticalAlignment="Top" Width="75" Click="BtnToday_Click"/>
 		<Button Name="BtnNext" Content="&gt;&gt;" HorizontalAlignment="Left" Margin="135,19,0,0" VerticalAlignment="Top" Width="40" Click="BtnNext_Click"/>
 		<Label Name="LblDate"  Content="Date" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="16"/>
-		<Button Name="BtnNewLog" Content="New Log" HorizontalAlignment="Left" Margin="616,19,0,0" VerticalAlignment="Top" Width="75" Click="BtnNewLog_Click"/>
+
+
+		<Button Name="BtnNewLog" Content="New Log" HorizontalAlignment="Right" Margin="0,51,10,0" VerticalAlignment="Top" Width="75" Click="BtnNewLog_Click"/>
+		
+		<Button Name="BtnEditLog" Content="Edit" HorizontalAlignment="Right" Margin="0,76,10,0" VerticalAlignment="Top" Width="75" Click="BtnEditLog_Click">
+			<Button.Style>
+				<Style>
+					<Style.Triggers>
+						<DataTrigger 
+							Binding ="{Binding ElementName=Logs, Path=SelectedIndex}" 
+							Value="-1">
+							<Setter Property="Button.IsEnabled" Value="false"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+		</Button>
+		
+		<Button Name="BtnDeleteLog" Content="Delete" HorizontalAlignment="Right" Margin="0,102,10,0" VerticalAlignment="Top" Width="75" Click="BtnDeleteLog_Click">
+			<Button.Style>
+				<Style>
+					<Style.Triggers>
+						<DataTrigger 
+							Binding ="{Binding ElementName=Logs, Path=SelectedIndex}" 
+							Value="-1">
+							<Setter Property="Button.IsEnabled" Value="false"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+		</Button>
 	</Grid>
 </Window>
