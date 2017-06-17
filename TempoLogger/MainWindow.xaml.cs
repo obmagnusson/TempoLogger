@@ -88,7 +88,7 @@ namespace TempoLogger
 		private void LoadSelectedDay()
 		{
 			_logs = _repo.GetByDate(_selectedDate);
-			logs.ItemsSource = _logs;
+			Logs.ItemsSource = _logs;
 			CalculateDayTotal();
 			LblDate.Content = _selectedDate.ToString("d.M.yyyy");
 		}
@@ -101,7 +101,11 @@ namespace TempoLogger
 		private void BtnNewLog_Click(object sender, RoutedEventArgs e)
 		{
 			var logform = new LogForm();
-			logform.ShowDialog();
+			var success = logform.ShowDialog() ?? false;
+
+			if (!success) return;
+			_repo.Add(logform.Model);
+			LoadSelectedDay();
 		}
 	}
 }

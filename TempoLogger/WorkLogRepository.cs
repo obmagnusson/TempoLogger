@@ -87,5 +87,10 @@ namespace TempoLogger
 		{
 			return _logs.Where(x => x.Date.Date == date.Date).ToList();
 		}
+
+		public void Add(WorkLog entity)
+		{
+			_logs.Add(entity);
+		}
 	}
 }
