@@ -83,10 +83,9 @@
 
 			<ListView.View>
 				<GridView>
-					<GridViewColumn Header="Issue" Width="50" DisplayMemberBinding="{Binding Issue}" />
-					<GridViewColumn Header="Title" Width="200" DisplayMemberBinding="{Binding Title}" />
+					<GridViewColumn Header="Issue" Width="100" DisplayMemberBinding="{Binding Issue}" />
 					<GridViewColumn Header="Comment"
-						Width="250">
+						Width="400">
 
 
 						<GridViewColumn.CellTemplate>

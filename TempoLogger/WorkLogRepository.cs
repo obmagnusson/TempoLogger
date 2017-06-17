@@ -12,7 +12,6 @@ namespace TempoLogger
 			new WorkLog
 			{
 				Issue = "AB-123",
-				Title = "Test issue",
 				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 				Start = "13:00",
 				End = "14:00",
@@ -21,7 +20,6 @@ namespace TempoLogger
 			new WorkLog
 			{
 				Issue = "AB-123",
-				Title = "Test issue",
 				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 				Start = "13:00",
 				End = "14:00",
@@ -30,7 +28,6 @@ namespace TempoLogger
 			new WorkLog
 			{
 				Issue = "AB-123",
-				Title = "Test issue",
 				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 				Start = "13:00",
 				End = "14:00",
@@ -39,7 +36,6 @@ namespace TempoLogger
 			new WorkLog
 			{
 				Issue = "AB-123",
-				Title = "Test issue",
 				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 				Start = "13:00",
 				End = "14:00",
@@ -48,7 +44,6 @@ namespace TempoLogger
 			new WorkLog
 			{
 				Issue = "XY-321",
-				Title = "Test issue",
 				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
 				Start = "13:00",
 				End = "14:30",
@@ -57,7 +52,6 @@ namespace TempoLogger
 			new WorkLog
 			{
 				Issue = "XY-321",
-				Title = "Test issue",
 				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
 				Start = "13:00",
 				End = "14:30",
@@ -66,7 +60,6 @@ namespace TempoLogger
 			new WorkLog
 			{
 				Issue = "XY-321",
-				Title = "Test issue",
 				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
 				Start = "13:00",
 				End = "14:30",
@@ -75,7 +68,6 @@ namespace TempoLogger
 			new WorkLog
 			{
 				Issue = "XY-321",
-				Title = "Test issue",
 				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
 				Start = "13:00",
 				End = "14:30",
