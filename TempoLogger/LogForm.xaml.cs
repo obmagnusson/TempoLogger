@@ -51,11 +51,10 @@ namespace TempoLogger
 			Model.Issue = TxtIssue.Text;
 			Model.Start = TxtStart.Text;
 			Model.End = TxtEnd.Text;
-			// TODO Model.DurationSeconds = TxtDuration.Text;
 			Model.Comment = TxtComment.Text;
 
 			// ReSharper disable once PossibleInvalidOperationException
-			// Has value is checked in Validate()
+			// HasValue is checked in Validate()
 			Model.Date = DpDate.SelectedDate.Value;
 
 			DialogResult = true;
@@ -111,11 +110,13 @@ namespace TempoLogger
 		private void TxtStart_LostFocus(object sender, RoutedEventArgs e)
 		{
 			TxtStart.Text = FormatTimeString(TxtStart.Text);
+			SetTxtDuration();
 		}
 
 		private void TxtEnd_LostFocus(object sender, RoutedEventArgs e)
 		{
 			TxtEnd.Text = FormatTimeString(TxtEnd.Text);
+			SetTxtDuration();
 		}
 
 		/// <summary>
@@ -133,7 +134,7 @@ namespace TempoLogger
 
 			var hourStr = match.Groups[1].Value;
 
-			var minuteStr = match.Groups.Count == 3
+			var minuteStr = match.Groups.Count == 3 && !string.IsNullOrEmpty(match.Groups[2].Value)
 				? match.Groups[2].Value
 				: "00";
 
@@ -144,11 +145,10 @@ namespace TempoLogger
 			return hourStr + ":" + minuteStr;
 		}
 
-		//private void CalculateDuration()
-		//{
-		//	var regex = @"^([0-9][0-9]?):?([0-9]{2})?$";
-			
-		//	var timeFrom
-		//}
+		private void SetTxtDuration()
+		{
+			var durationSeconds = WorkLogHelper.CalculateDurationSeconds(TxtStart.Text, TxtEnd.Text);
+			TxtDuration.Text = WorkLogHelper.SecondsToString(durationSeconds);
+		}
 	}
 }

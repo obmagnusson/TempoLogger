@@ -13,7 +13,7 @@ namespace TempoLogger.Models
 		public string Account { get; set; }
 		public string Comment { get; set; }
 
-		public int DurationSeconds => WorkLogHelper.CalculateDuration(Start, End);
+		public int DurationSeconds => WorkLogHelper.CalculateDurationSeconds(Start, End);
 		public string DurationString => WorkLogHelper.SecondsToString(DurationSeconds);
 	}
 }

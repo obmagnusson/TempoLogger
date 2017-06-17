@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace TempoLogger.Helpers
 {
@@ -53,10 +54,16 @@ namespace TempoLogger.Helpers
 			return ret;
 		}
 
-		public static int CalculateDuration(string start, string end)
+		/// <summary>
+		/// Takes start and end times (HH:mm) and returns the difference in seconds
+		/// </summary>
+		/// <param name="start"></param>
+		/// <param name="end"></param>
+		/// <returns></returns>
+		public static int CalculateDurationSeconds(string start, string end)
 		{
-			if (!DateTime.TryParse(start, out DateTime startDate)) return 0;
-			if (!DateTime.TryParse(end, out DateTime endDate)) return 0;
+			if (!DateTime.TryParseExact(start, "HH:mm", null, DateTimeStyles.None, out DateTime startDate)) return 0;
+			if (!DateTime.TryParseExact(end, "HH:mm", null, DateTimeStyles.None, out DateTime endDate)) return 0;
 
 			var timeSpan = endDate - startDate;
 			return (int) timeSpan.TotalSeconds;
