@@ -1,79 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml;
+using System.Xml.Serialization;
 using TempoLogger.Models;
 
 namespace TempoLogger
 {
 	public class WorkLogRepository
 	{
-		private readonly List<WorkLog> _logs = new List<WorkLog>
+		private readonly List<WorkLog> _logs;
+
+		public WorkLogRepository()
 		{
-			new WorkLog
-			{
-				Issue = "AB-123",
-				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
-				Start = "13:00",
-				End = "14:00",
-				Date = DateTime.Now
-			},
-			new WorkLog
-			{
-				Issue = "AB-123",
-				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
-				Start = "13:00",
-				End = "14:00",
-				Date = DateTime.Now
-			},
-			new WorkLog
-			{
-				Issue = "AB-123",
-				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
-				Start = "13:00",
-				End = "14:00",
-				Date = DateTime.Now
-			},
-			new WorkLog
-			{
-				Issue = "AB-123",
-				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
-				Start = "13:00",
-				End = "14:00",
-				Date = DateTime.Now
-			},
-			new WorkLog
-			{
-				Issue = "XY-321",
-				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
-				Start = "13:00",
-				End = "14:30",
-				Date = DateTime.Now.AddDays(-1)
-			},
-			new WorkLog
-			{
-				Issue = "XY-321",
-				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
-				Start = "13:00",
-				End = "14:30",
-				Date = DateTime.Now.AddDays(-1)
-			},
-			new WorkLog
-			{
-				Issue = "XY-321",
-				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
-				Start = "13:00",
-				End = "14:30",
-				Date = DateTime.Now.AddDays(-1)
-			},
-			new WorkLog
-			{
-				Issue = "XY-321",
-				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
-				Start = "13:00",
-				End = "14:30",
-				Date = DateTime.Now.AddDays(-1)
-			},
-		};
+			// Create a new serializer
+			var serializer = new XmlSerializer(typeof(List<WorkLog>));
+
+			// Create a StreamReader
+			TextReader reader = new StreamReader("logs.xml");
+
+			// Deserialize the file
+			_logs = (List<WorkLog>)serializer.Deserialize(reader);
+
+			// Close the reader
+			reader.Close();
+		}
 
 		public List<WorkLog> GetByDate(DateTime date)
 		{
@@ -83,6 +35,24 @@ namespace TempoLogger
 		public void Add(WorkLog entity)
 		{
 			_logs.Add(entity);
+		}
+
+		/// <summary>
+		/// Saves the list of logs to file
+		/// </summary>
+		public void Save()
+		{
+			// Create a new Serializer
+			var serializer = new XmlSerializer(typeof(List<WorkLog>));
+
+			// Create a new StreamWriter
+			TextWriter writer = new StreamWriter("logs.xml");
+
+			// Serialize the file
+			serializer.Serialize(writer, _logs);
+
+			// Close the writer
+			writer.Close();
 		}
 	}
 }

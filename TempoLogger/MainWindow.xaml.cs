@@ -106,6 +106,7 @@ namespace TempoLogger
 			if (!success) return;
 			_repo.Add(logform.Model);
 			LoadSelectedDay();
+			_repo.Save();
 		}
 
 		/// <summary>
@@ -122,6 +123,7 @@ namespace TempoLogger
 
 			if (!success) return;
 			LoadSelectedDay();
+			_repo.Save();
 		}
 	}
 }
