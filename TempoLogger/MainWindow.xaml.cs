@@ -125,5 +125,10 @@ namespace TempoLogger
 			LoadSelectedDay();
 			_repo.Save();
 		}
+
+		//private void ListViewItem_RightClick(object sender, MouseButtonEventArgs e)
+		//{
+		//	LogsContextMenu.IsOpen = true;
+		//}
 	}
 }
