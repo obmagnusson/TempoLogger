@@ -108,7 +108,12 @@ namespace TempoLogger
 			LoadSelectedDay();
 		}
 
-		private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
+		/// <summary>
+		/// Opens a new LogForm window dialog to edit log that was double clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void ListViewItem_DoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			var workLog = ((ListViewItem)sender).Content as WorkLog;
 			
@@ -116,9 +121,7 @@ namespace TempoLogger
 			var success = logform.ShowDialog() ?? false;
 
 			if (!success) return;
-			//_repo.Add(logform.Model);
 			LoadSelectedDay();
-
 		}
 	}
 }

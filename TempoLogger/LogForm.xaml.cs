@@ -38,7 +38,10 @@ namespace TempoLogger
 			SetTxtDuration();
 		}
 
-		private void BtnSave_Click(object sender, RoutedEventArgs e)
+		/// <summary>
+		/// Saves worklog
+		/// </summary>
+		private void Submit()
 		{
 			if (!Validate()) return;
 
@@ -53,6 +56,36 @@ namespace TempoLogger
 
 			DialogResult = true;
 			Close();
+		}
+
+		/// <summary>
+		/// Event handler for keydown events on text inputs, if enter is pressed the worklog is submitted
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void Txt_HandleKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Return) Submit();
+		}
+
+		/// <summary>
+		/// Event handler for keydown events on comment input, if ctrl+enter is pressed the worklog is submitted
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void TxtComment_HandleKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Return && Keyboard.Modifiers == ModifierKeys.Control) Submit();
+		}
+
+		/// <summary>
+		/// Event handler for onclick event on save button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void BtnSave_Click(object sender, RoutedEventArgs e)
+		{
+			Submit();
 		}
 
 		private bool Validate()
