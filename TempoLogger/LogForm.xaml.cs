@@ -23,18 +23,11 @@ namespace TempoLogger
 	public partial class LogForm : Window
 	{
 		public WorkLog Model { get; set; }
-		public LogForm()
+		public LogForm(WorkLog edit = null)
 		{
 			InitializeComponent();
 
-			// Create new Log (else is edit)
-			if (Model == null)
-			{
-				Model = new WorkLog
-				{
-					Date = DateTime.Now.Date,
-				};
-			}
+			Model = edit ?? new WorkLog {Date = DateTime.Now.Date};
 
 			TxtIssue.Text = Model.Issue;
 			DpDate.SelectedDate = Model.Date;
@@ -42,6 +35,7 @@ namespace TempoLogger
 			TxtEnd.Text = Model.End;
 			TxtDuration.Text = WorkLogHelper.SecondsToString(Model.DurationSeconds);
 			TxtComment.Text = Model.Comment;
+			SetTxtDuration();
 		}
 
 		private void BtnSave_Click(object sender, RoutedEventArgs e)

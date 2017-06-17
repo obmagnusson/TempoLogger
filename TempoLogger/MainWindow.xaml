@@ -33,6 +33,7 @@
 							<GradientStop Color="DarkBlue" Offset="1"/>
 						</LinearGradientBrush>
 					</Style.Resources>
+					<EventSetter Event="MouseDoubleClick" Handler="HandleDoubleClick" />
 					<Setter Property="Template">
 						<Setter.Value>
 							<ControlTemplate TargetType="{x:Type ListViewItem}">

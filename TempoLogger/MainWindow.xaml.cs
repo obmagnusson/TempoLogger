@@ -107,5 +107,18 @@ namespace TempoLogger
 			_repo.Add(logform.Model);
 			LoadSelectedDay();
 		}
+
+		private void HandleDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			var workLog = ((ListViewItem)sender).Content as WorkLog;
+			
+			var logform = new LogForm(workLog);
+			var success = logform.ShowDialog() ?? false;
+
+			if (!success) return;
+			//_repo.Add(logform.Model);
+			LoadSelectedDay();
+
+		}
 	}
 }
