@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TempoLogger.Helpers;
 using TempoLogger.Models;
 
 namespace TempoLogger
@@ -39,7 +40,7 @@ namespace TempoLogger
 			DpDate.SelectedDate = Model.Date;
 			TxtStart.Text = Model.Start;
 			TxtEnd.Text = Model.End;
-			TxtDuration.Text = Model.Duration;
+			TxtDuration.Text = WorkLogHelper.SecondsToString(Model.DurationSeconds);
 			TxtComment.Text = Model.Comment;
 		}
 
@@ -48,11 +49,14 @@ namespace TempoLogger
 			if (!Validate()) return;
 
 			Model.Issue = TxtIssue.Text;
-			Model.Date = DpDate.SelectedDate.Value;
 			Model.Start = TxtStart.Text;
 			Model.End = TxtEnd.Text;
-			Model.Duration = TxtDuration.Text;
+			// TODO Model.DurationSeconds = TxtDuration.Text;
 			Model.Comment = TxtComment.Text;
+
+			// ReSharper disable once PossibleInvalidOperationException
+			// Has value is checked in Validate()
+			Model.Date = DpDate.SelectedDate.Value;
 
 			DialogResult = true;
 			Close();
@@ -60,8 +64,8 @@ namespace TempoLogger
 
 		private bool Validate()
 		{
-			var issueRegex = @"^[[A-Za-z]+\-[0-9]+$";
-			var timeRegex = @"^[0-9][0-9]?:[0-9]{2}$";
+			const string issueRegex = @"^[[A-Za-z]+\-[0-9]+$";
+			const string timeRegex = @"^[0-9][0-9]?:[0-9]{2}$";
 			//var durationRegex = @"^(([0-9]+)h)?\s*(([0-9]+)m)?$";
 
 			if (!Regex.IsMatch(TxtIssue.Text, issueRegex))
@@ -114,9 +118,14 @@ namespace TempoLogger
 			TxtEnd.Text = FormatTimeString(TxtEnd.Text);
 		}
 
-		private string FormatTimeString(string timeString)
+		/// <summary>
+		/// Formats a time string in the HH:MM format
+		/// </summary>
+		/// <param name="timeString"></param>
+		/// <returns></returns>
+		private static string FormatTimeString(string timeString)
 		{
-			var regex = @"^([0-9][0-9]?):?([0-9]{2})?$";
+			const string regex = @"^([0-9][0-9]?):?([0-9]{2})?$";
 
 			var match = Regex.Match(timeString, regex);
 
@@ -134,5 +143,12 @@ namespace TempoLogger
 
 			return hourStr + ":" + minuteStr;
 		}
+
+		//private void CalculateDuration()
+		//{
+		//	var regex = @"^([0-9][0-9]?):?([0-9]{2})?$";
+			
+		//	var timeFrom
+		//}
 	}
 }

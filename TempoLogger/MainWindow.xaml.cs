@@ -44,11 +44,7 @@ namespace TempoLogger
 		/// </summary>
 		private void CalculateDayTotal()
 		{
-			var totalSeconds = 0;
-			foreach (var log in _logs)
-			{
-				totalSeconds += log.GetDurationSeconds();
-			}
+			var totalSeconds = _logs.Sum(log => log.DurationSeconds);
 
 			LblCurrentDayTotal.Content = WorkLogHelper.SecondsToString(totalSeconds);
 		}

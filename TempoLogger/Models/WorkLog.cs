@@ -1,4 +1,5 @@
 ﻿using System;
+using TempoLogger.Helpers;
 
 namespace TempoLogger.Models
 {
@@ -8,9 +9,11 @@ namespace TempoLogger.Models
 		public string Title { get; set; }
 		public string Start { get; set; }
 		public string End { get; set; }
-		public string Duration { get; set; }
 		public DateTime Date { get; set; }
 		public string Account { get; set; }
 		public string Comment { get; set; }
+
+		public int DurationSeconds => WorkLogHelper.CalculateDuration(Start, End);
+		public string DurationString => WorkLogHelper.SecondsToString(DurationSeconds);
 	}
 }

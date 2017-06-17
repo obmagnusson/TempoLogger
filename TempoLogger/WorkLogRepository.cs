@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TempoLogger.Models;
 
 namespace TempoLogger
@@ -18,7 +16,6 @@ namespace TempoLogger
 				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 				Start = "13:00",
 				End = "14:00",
-				Duration = "1h",
 				Date = DateTime.Now
 			},
 			new WorkLog
@@ -28,7 +25,6 @@ namespace TempoLogger
 				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 				Start = "13:00",
 				End = "14:00",
-				Duration = "1h",
 				Date = DateTime.Now
 			},
 			new WorkLog
@@ -38,7 +34,6 @@ namespace TempoLogger
 				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 				Start = "13:00",
 				End = "14:00",
-				Duration = "1h",
 				Date = DateTime.Now
 			},
 			new WorkLog
@@ -48,7 +43,6 @@ namespace TempoLogger
 				Comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non nibh quis odio aliquet venenatis.",
 				Start = "13:00",
 				End = "14:00",
-				Duration = "1h",
 				Date = DateTime.Now
 			},
 			new WorkLog
@@ -57,8 +51,7 @@ namespace TempoLogger
 				Title = "Test issue",
 				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
 				Start = "13:00",
-				End = "14:00",
-				Duration = "1h",
+				End = "14:30",
 				Date = DateTime.Now.AddDays(-1)
 			},
 			new WorkLog
@@ -67,8 +60,7 @@ namespace TempoLogger
 				Title = "Test issue",
 				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
 				Start = "13:00",
-				End = "14:00",
-				Duration = "1h",
+				End = "14:30",
 				Date = DateTime.Now.AddDays(-1)
 			},
 			new WorkLog
@@ -77,8 +69,7 @@ namespace TempoLogger
 				Title = "Test issue",
 				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
 				Start = "13:00",
-				End = "14:00",
-				Duration = "1h",
+				End = "14:30",
 				Date = DateTime.Now.AddDays(-1)
 			},
 			new WorkLog
@@ -87,8 +78,7 @@ namespace TempoLogger
 				Title = "Test issue",
 				Comment = "Lucas ipsum dolor sit amet ubese aayla max quermian owen terrik bib soontir ryn x1. Darth binks alderaan darpa x1 anthos vratix.",
 				Start = "13:00",
-				End = "14:00",
-				Duration = "1h",
+				End = "14:30",
 				Date = DateTime.Now.AddDays(-1)
 			},
 		};
