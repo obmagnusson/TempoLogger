@@ -148,5 +148,7 @@
 				</Style>
 			</Button.Style>
 		</Button>
+		
+		<Label Name="LblSaving" Content="Saving" HorizontalAlignment="Right" Margin="0,17,10,0" VerticalAlignment="Top" FontSize="10" HorizontalContentAlignment="Right" Visibility="Hidden"/>
 	</Grid>
 </Window>

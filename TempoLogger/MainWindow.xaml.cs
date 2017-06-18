@@ -37,6 +37,7 @@ namespace TempoLogger
 
 			LblCurrentDayTotal.Content = "0";
 			CalculateDayTotal();
+			LblSaving.Visibility = Visibility.Visible;
 		}
 
 		/// <summary>
@@ -106,7 +107,9 @@ namespace TempoLogger
 			if (!success) return;
 			_repo.Add(logform.Model);
 			LoadSelectedDay();
-			_repo.Save();
+
+			SaveHelper();
+
 		}
 
 		/// <summary>
@@ -142,7 +145,8 @@ namespace TempoLogger
 
 			if (!success) return;
 			LoadSelectedDay();
-			_repo.Save();
+
+			SaveHelper();
 		}
 
 		/// <summary>
@@ -157,7 +161,9 @@ namespace TempoLogger
 			if (messageBoxResult != MessageBoxResult.Yes) return;
 			var workLog = Logs.SelectedItem as WorkLog;
 			_repo.Delete(workLog);
-			_repo.Save();
+
+			SaveHelper();
+
 			LoadSelectedDay();
 		}
 
@@ -169,6 +175,16 @@ namespace TempoLogger
 		private void Logs_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			Logs.UnselectAll();
+		}
+
+		/// <summary>
+		/// Displays saving indicator before calling repo save method then hiding the indicator
+		/// </summary>
+		private void SaveHelper()
+		{
+			LblSaving.Visibility = Visibility.Visible;
+			_repo.Save();
+			LblSaving.Visibility = Visibility.Hidden;
 		}
 
 		//private void ListViewItem_RightClick(object sender, MouseButtonEventArgs e)
