@@ -5,8 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:TempoLogger"
 		mc:Ignorable="d"
-		Title="MainWindow" Height="517.385" Width="801
-		">
+		Title="Tempo Logger" Height="517.385" Width="801">
 
 
 
@@ -14,7 +13,6 @@
 		<ListView Name="Logs" BorderThickness="1"
 					HorizontalContentAlignment="Left"
 					Margin="10,51,95,52" SelectionMode="Single" 
-					BorderBrush="Transparent"
 					Foreground="#15619D" FontSize="14" RenderTransformOrigin="0.5,0.5" MouseDown="Logs_MouseDown">
 			<ListView.RenderTransform>
 				<TransformGroup>
@@ -150,5 +148,7 @@
 		</Button>
 		
 		<Label Name="LblSaving" Content="Saving" HorizontalAlignment="Right" Margin="0,17,10,0" VerticalAlignment="Top" FontSize="10" HorizontalContentAlignment="Right" Visibility="Hidden"/>
+		
+		<Button Name="BtnPostWorkLogs" Content="Post Worklogs"  HorizontalAlignment="Center" Margin="0,446,0,0" VerticalAlignment="Top" Width="128" FontSize="18" Click="BtnPostWorkLogs_Click"/>
 	</Grid>
 </Window>

@@ -54,10 +54,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="JiraApi.cs" />
+    <Compile Include="ProgressDialog.xaml.cs">
+      <DependentUpon>ProgressDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LogForm.xaml.cs">
       <DependentUpon>LogForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkLogRepository.cs" />
+    <Page Include="ProgressDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LogForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

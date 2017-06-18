@@ -187,9 +187,24 @@ namespace TempoLogger
 			LblSaving.Visibility = Visibility.Hidden;
 		}
 
-		//private void ListViewItem_RightClick(object sender, MouseButtonEventArgs e)
-		//{
-		//	LogsContextMenu.IsOpen = true;
-		//}
+		/// <summary>
+		/// Starts the posting progress of worklogs, displays a dialog with progress bar
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void BtnPostWorkLogs_Click(object sender, RoutedEventArgs e)
+		{
+			var progressDialog = new ProgressDialog();
+			var progress = new Progress<int>(value =>
+			{
+				progressDialog.SetProgress(value);
+			});
+
+			var jiraApi = new JiraApi();
+
+			var task = jiraApi.PostWorkLogs(_logs, progressDialog, progress);
+			progressDialog.ShowDialog();
+			await task;
+		}
 	}
 }

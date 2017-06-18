@@ -11,6 +11,7 @@ namespace TempoLogger.Models
 		public DateTime Date { get; set; }
 		public string Account { get; set; }
 		public string Comment { get; set; }
+		public bool Logged { get; set; }
 
 		public int DurationSeconds => WorkLogHelper.CalculateDurationSeconds(Start, End);
 		public string DurationString => WorkLogHelper.SecondsToString(DurationSeconds);
