@@ -203,7 +203,7 @@ namespace TempoLogger
 			var jiraApi = new JiraApi();
 
 			var task = jiraApi.PostWorkLogs(_logs, progressDialog, progress);
-			progressDialog.ShowDialog();
+			//progressDialog.ShowDialog();
 			await task;
 		}
 	}
