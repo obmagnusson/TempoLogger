@@ -13,6 +13,7 @@ namespace TempoLogger.Windows
 		public LoginDialog()
 		{
 			InitializeComponent();
+			TxtUsername.Focus();
 		}
 
 		private void BtnSave_Click(object sender, RoutedEventArgs e)

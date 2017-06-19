@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,8 +16,8 @@ namespace TempoLogger
 {
 	public class JiraApi
 	{
-		private readonly string BaseUrl = "https://sendiradid.atlassian.net";
-
+		private static Cookie _cookie;
+		private const string BaseUrl = "https://sendiradid.atlassian.net";
 
 		/// <summary>
 		/// Posts the list of worklogs to Jira, marks them as read and reports the progress
@@ -29,7 +28,13 @@ namespace TempoLogger
 		public async Task PostWorkLogs(List<WorkLog> logs, ProgressDialog progressDialog, IProgress<int> progress)
 		{
 			// If user is not authenticated and authentication fails, return
-			if(!CheckAuthentication() && !await Authenticate()) return;;
+			if(_cookie == null && !await Authenticate()) return;
+
+			var cookieContainer = new CookieContainer();
+			// ReSharper disable once AssignNullToNotNullAttribute
+			// Stupid resharper
+			cookieContainer.Add(new Uri(BaseUrl), _cookie);
+
 			//try
 			//{
 			//	await PostWorkLogsHelper(logs, progressDialog, progress);
@@ -65,65 +70,53 @@ namespace TempoLogger
 			});
 		}
 
-		/// <summary>
-		/// Checks if a cookie exists for Jira Api, if it does not then it opens login dialog
-		/// </summary>
-		private bool CheckAuthentication()
+
+		private static async Task<bool> Authenticate()
 		{
-			var cookiePath = new Uri(BaseUrl);
-			try
+			while (true)
 			{
-				//// Calculate "one day ago"
-				//DateTime expiration = DateTime.UtcNow - TimeSpan.FromDays(1);
-				//// Format the cookie as seen on FB.com.  Path and domain name are important factors here.
-				//string cookie = String.Format("{0}=; expires={1}; path=/; domain=.facebook.com", "", expiration.ToString("R"));
-				//// Set a single value from this cookie (doesnt work if you try to do all at once, for some reason)
-				//Application.SetCookie(cookiePath, cookie);
-				Application.GetCookie(cookiePath);
-				return true;
-			}
-			catch (Win32Exception)
-			{
-				return false;
-			}
-		}
+				var loginDialog = new LoginDialog();
+				var result = loginDialog.ShowDialog() ?? false;
 
-		private async Task<bool> Authenticate()
-		{
-			var loginDialog = new LoginDialog();
-			var result = loginDialog.ShowDialog() ?? false;
+				if (!result) return false;
 
-			if (!result) return false;
 
-			
-			using (var client = new HttpClient())
-			{
-				client.BaseAddress = new Uri(BaseUrl);
-				client.DefaultRequestHeaders.Accept.Clear();
-				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-				var data = JsonConvert.SerializeObject(new
+				using (var client = new HttpClient())
 				{
-					username = loginDialog.Username,
-					password = loginDialog.Password
-				});
+					client.BaseAddress = new Uri(BaseUrl);
+					client.DefaultRequestHeaders.Accept.Clear();
+					client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-				var body = new StringContent(data, Encoding.UTF8, "application/json");
+					var data = JsonConvert.SerializeObject(new
+					{
+						username = loginDialog.Username,
+						password = loginDialog.Password
+					});
+
+					var body = new StringContent(data, Encoding.UTF8, "application/json");
 
 
-				var response = await client.PostAsync("jira/rest/auth/1/session", body);
+					var response = await client.PostAsync("/rest/auth/1/session", body);
 
-				if (response.StatusCode == HttpStatusCode.Unauthorized)
-				{
-					MessageBox.Show("Login failed", "Incorrect username or password", MessageBoxButton.OK);
+					if (response.StatusCode == HttpStatusCode.Unauthorized)
+					{
+						MessageBox.Show("Incorrect username or password", "Login failed", MessageBoxButton.OK);
+						continue;
+					}
+					if (!response.IsSuccessStatusCode)
+					{
+						MessageBox.Show("Error", "Login failed", MessageBoxButton.OK);
+						continue;
+					}
+
+					var model = new { session = new {name = "", value = ""}};
+
+					var responseContent = await response.Content.ReadAsStringAsync();
+					var session = JsonConvert.DeserializeAnonymousType(responseContent, model);
+
+					_cookie = new Cookie(session.session.name, session.session.value);
+					return true;
 				}
-				if (!response.IsSuccessStatusCode) return false;
-
-				var responseContent = await response.Content.ReadAsStringAsync();
-				var session = JsonConvert.DeserializeObject<JiraAuthenticationSession>(responseContent);
-
-				Application.SetCookie(new Uri(BaseUrl), session.Name + "=" + session.Value);
-				return true;
 			}
 		}
 	}

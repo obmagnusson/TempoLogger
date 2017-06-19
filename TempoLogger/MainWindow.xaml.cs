@@ -37,7 +37,6 @@ namespace TempoLogger
 
 			LblCurrentDayTotal.Content = "0";
 			CalculateDayTotal();
-			LblSaving.Visibility = Visibility.Visible;
 		}
 
 		/// <summary>
