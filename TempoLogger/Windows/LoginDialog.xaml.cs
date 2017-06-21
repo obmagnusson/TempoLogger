@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace TempoLogger.Windows
 {
@@ -14,19 +15,32 @@ namespace TempoLogger.Windows
 		{
 			InitializeComponent();
 			TxtUsername.Focus();
+
+			TxtUsername.KeyDown += TextBox_OnEnter;
+			TxtPassword.KeyDown += TextBox_OnEnter;
 		}
 
 		private void BtnSave_Click(object sender, RoutedEventArgs e)
 		{
-			DialogResult = true;
-			Username = TxtUsername.Text;
-			Password = TxtPassword.Password;
-			Close();
+			Submit();
 		}
 
 		private void BtnCancel_Click(object sender, RoutedEventArgs e)
 		{
 			DialogResult = false;
+			Close();
+		}
+
+		private void TextBox_OnEnter(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Return) Submit();
+		}
+
+		private void Submit()
+		{
+			DialogResult = true;
+			Username = TxtUsername.Text;
+			Password = TxtPassword.Password;
 			Close();
 		}
 	}

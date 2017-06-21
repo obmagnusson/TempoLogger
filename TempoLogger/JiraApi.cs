@@ -27,29 +27,32 @@ namespace TempoLogger
 		/// <param name="progress"></param>
 		public async Task PostWorkLogs(List<WorkLog> logs, ProgressDialog progressDialog, IProgress<int> progress)
 		{
+			if (!logs.Any()) return;
+
 			// If user is not authenticated and authentication fails, return
 			if(_cookie == null && !await Authenticate()) return;
 
-			var cookieContainer = new CookieContainer();
-			// ReSharper disable once AssignNullToNotNullAttribute
-			// Stupid resharper
-			cookieContainer.Add(new Uri(BaseUrl), _cookie);
-
-			//try
-			//{
-			//	await PostWorkLogsHelper(logs, progressDialog, progress);
-			//}
-			//finally
-			//{
-			//	progressDialog.Close();
-			//}
+			try
+			{
+				await PostWorkLogsHelper(logs, progress);
+			}
+			finally
+			{
+				progressDialog.Close();
+			}
 		}
 
-		private async Task PostWorkLogsHelper(IReadOnlyCollection<WorkLog> logs, ProgressDialog progressDialog, IProgress<int> progress)
+		/// <summary>
+		/// Contains all async stuff for posting worklogs so that a dialog can be shown after it has
+		/// started and closed when it has finished
+		/// </summary>
+		/// <param name="logs"></param>
+		/// <param name="progress"></param>
+		/// <returns></returns>
+		private async Task PostWorkLogsHelper(IReadOnlyCollection<WorkLog> logs, IProgress<int> progress)
 		{
 			var totalCount = logs.Count;
 			var tempCount = 0;
-
 
 			// Only post logs that are not marked as logged
 			foreach (var log in logs.Where(x => !x.Logged))
@@ -57,7 +60,7 @@ namespace TempoLogger
 				tempCount++;
 				//await the processing and uploading logic here
 				await PostWorkLog(log);
-				progress?.Report((tempCount * 100 / totalCount));
+				progress?.Report(tempCount * 100 / totalCount);
 				log.Logged = true;
 			}
 		}
