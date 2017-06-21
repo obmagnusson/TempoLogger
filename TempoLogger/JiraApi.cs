@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,6 +30,9 @@ namespace TempoLogger
 		{
 			if (!logs.Any()) return;
 
+			// Check if cookie has expired
+			//TODO if (_cookie != null && !TestCookie()) _cookie = null;
+
 			// If user is not authenticated and authentication fails, return
 			if(_cookie == null && !await Authenticate()) return;
 
@@ -51,27 +55,64 @@ namespace TempoLogger
 		/// <returns></returns>
 		private async Task PostWorkLogsHelper(IReadOnlyCollection<WorkLog> logs, IProgress<int> progress)
 		{
-			var totalCount = logs.Count;
+			// Only post logs that are not marked as logged
+			var unLogged = logs.Where(x => !x.Logged).ToList();
+			var totalCount = unLogged.Count;
 			var tempCount = 0;
 
-			// Only post logs that are not marked as logged
-			foreach (var log in logs.Where(x => !x.Logged))
+			foreach (var log in unLogged)
 			{
 				tempCount++;
-				//await the processing and uploading logic here
-				await PostWorkLog(log);
+				var issue = await GetIssue(log.Issue);
+				//await PostWorkLog(log);
 				progress?.Report(tempCount * 100 / totalCount);
 				log.Logged = true;
 			}
 		}
 
-		private Task PostWorkLog(WorkLog log)
+		private async Task<Issue> GetIssue(string key)
 		{
-			return Task.Run(() =>
+			var uri = new Uri(BaseUrl);
+
+			var cookieContainer = new CookieContainer();
+
+			cookieContainer.Add(uri, _cookie);
+
+			var handler = new HttpClientHandler
 			{
-				Thread.Sleep(1000);
-			});
+				CookieContainer = cookieContainer
+			};
+			using (var client = new HttpClient(handler))
+			{
+				client.BaseAddress = new Uri(BaseUrl);
+				client.DefaultRequestHeaders.Accept.Clear();
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+				var response = await client.GetAsync($"rest/api/2/issue/{key}?fields=summary,description,timetracking,io.tempo.jira__account");
+				var json = await response.Content.ReadAsStringAsync();
+
+				var issue = JsonConvert.DeserializeObject<Issue>(json);
+				return issue;
+			}
 		}
+
+		//private Task PostWorkLog(WorkLog log)
+		//{
+		//	var uri = new Uri(BaseUrl);
+
+		//	var cookieContainer = new CookieContainer();
+
+		//	cookieContainer.Add(uri, _cookie);
+
+		//	var handler = new HttpClientHandler
+		//	{
+		//		CookieContainer = cookieContainer
+		//	};
+		//	using (var client = new HttpClient(handler))
+		//	{
+				
+		//	}
+		//}
 
 
 		private static async Task<bool> Authenticate()
