@@ -5,7 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:TempoLogger"
 		mc:Ignorable="d"
-		Title="Tempo Logger" Height="517.385" Width="801">
+		Title="Tempo Logger" Height="517.385" Width="836">
 
 
 
@@ -90,6 +90,17 @@
 
 			<ListView.View>
 				<GridView>
+
+					<GridViewColumn Header="" Width="35">
+						<GridViewColumn.CellTemplate>
+							<DataTemplate>
+								<!--<TextBlock
+									TextWrapping="Wrap" Text="{Binding Logged}"/>-->
+								<CheckBox IsEnabled="False" IsChecked="{Binding Logged}"></CheckBox>
+							</DataTemplate>
+						</GridViewColumn.CellTemplate>
+					</GridViewColumn>
+
 					<GridViewColumn Header="Issue" Width="100" DisplayMemberBinding="{Binding Issue}" />
 					<GridViewColumn Header="Comment"
 						Width="400">
@@ -106,6 +117,8 @@
 					<GridViewColumn Header="To" Width="50" DisplayMemberBinding="{Binding End}" />
 					<GridViewColumn Header="Duration" Width="70" DisplayMemberBinding="{Binding DurationString}" />
 
+				
+					
 				</GridView>
 			</ListView.View>
 		</ListView>
