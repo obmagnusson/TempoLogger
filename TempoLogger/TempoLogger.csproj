@@ -59,6 +59,7 @@
     </ApplicationDefinition>
     <Compile Include="Exceptions\IssueNotFoundException.cs" />
     <Compile Include="JiraApi.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Issue.cs" />
     <Compile Include="ProgressDialog.xaml.cs">
       <DependentUpon>ProgressDialog.xaml</DependentUpon>

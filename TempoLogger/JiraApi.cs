@@ -66,6 +66,9 @@ namespace TempoLogger
 			{
 				tempCount++;
 				var issue = await GetIssue(log.Issue);
+				var account = issue?.fields?.iotempojira__account != null
+					? await GetAccount(issue.fields.iotempojira__account.id)
+					: null;
 				//await PostWorkLog(log);
 				progress?.Report(tempCount * 100 / totalCount);
 				log.Logged = true;
@@ -108,6 +111,43 @@ namespace TempoLogger
 			}
 		}
 
+
+		private async Task<Account> GetAccount(int id)
+		{
+			var uri = new Uri(BaseUrl);
+
+			var cookieContainer = new CookieContainer();
+
+			cookieContainer.Add(uri, _cookie);
+
+			var handler = new HttpClientHandler
+			{
+				CookieContainer = cookieContainer
+			};
+			using (var client = new HttpClient(handler))
+			{
+				client.BaseAddress = new Uri(BaseUrl);
+				client.DefaultRequestHeaders.Accept.Clear();
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+				var response = await client.GetAsync($"rest/tempo-accounts/1/account/{id}");
+
+				if (response.StatusCode == HttpStatusCode.Unauthorized)
+				{
+					_cookie = null;
+					throw new UnauthorizedException("Invalid cookie, please try again");
+				}
+
+				if (!response.IsSuccessStatusCode)
+					throw new IssueNotFoundException($"Account error - id: {id}");
+
+				var json = await response.Content.ReadAsStringAsync();
+
+				var account = JsonConvert.DeserializeObject<Account>(json);
+				return account;
+			}
+		}
+
 		//private Task PostWorkLog(WorkLog log)
 		//{
 		//	var uri = new Uri(BaseUrl);
@@ -122,7 +162,7 @@ namespace TempoLogger
 		//	};
 		//	using (var client = new HttpClient(handler))
 		//	{
-				
+
 		//	}
 		//}
 
