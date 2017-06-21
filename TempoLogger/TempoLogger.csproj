@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Exceptions\IssueNotFoundException.cs" />
     <Compile Include="JiraApi.cs" />
     <Compile Include="Models\Issue.cs" />
     <Compile Include="ProgressDialog.xaml.cs">
@@ -65,6 +66,7 @@
     <Compile Include="LogForm.xaml.cs">
       <DependentUpon>LogForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Exceptions\UnauthorizedException.cs" />
     <Compile Include="Windows\LoginDialog.xaml.cs">
       <DependentUpon>LoginDialog.xaml</DependentUpon>
     </Compile>

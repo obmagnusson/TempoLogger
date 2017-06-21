@@ -5,11 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.Remoting.Messaging;
+using System.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
+using TempoLogger.Exceptions;
 using TempoLogger.Models;
 using TempoLogger.Windows;
 
@@ -53,7 +55,7 @@ namespace TempoLogger
 		/// <param name="logs"></param>
 		/// <param name="progress"></param>
 		/// <returns></returns>
-		private async Task PostWorkLogsHelper(IReadOnlyCollection<WorkLog> logs, IProgress<int> progress)
+		private async Task PostWorkLogsHelper(IEnumerable<WorkLog> logs, IProgress<int> progress)
 		{
 			// Only post logs that are not marked as logged
 			var unLogged = logs.Where(x => !x.Logged).ToList();
@@ -70,7 +72,7 @@ namespace TempoLogger
 			}
 		}
 
-		private async Task<Issue> GetIssue(string key)
+		private static async Task<Issue> GetIssue(string key)
 		{
 			var uri = new Uri(BaseUrl);
 
@@ -89,6 +91,16 @@ namespace TempoLogger
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 				var response = await client.GetAsync($"rest/api/2/issue/{key}?fields=summary,description,timetracking,io.tempo.jira__account");
+
+				if (response.StatusCode == HttpStatusCode.Unauthorized)
+				{
+					_cookie = null;
+					throw new UnauthorizedException("Invalid cookie, please try again");
+				}
+
+				if (!response.IsSuccessStatusCode)
+					throw new IssueNotFoundException($"Issue not found - key: {key}");
+
 				var json = await response.Content.ReadAsStringAsync();
 
 				var issue = JsonConvert.DeserializeObject<Issue>(json);
