@@ -57,10 +57,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Exceptions\AccountNotFoundException.cs" />
     <Compile Include="Exceptions\IssueNotFoundException.cs" />
+    <Compile Include="Exceptions\WorkLogPostException.cs" />
     <Compile Include="JiraApi.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Issue.cs" />
+    <Compile Include="Models\WorkLogPostModel.cs" />
     <Compile Include="ProgressDialog.xaml.cs">
       <DependentUpon>ProgressDialog.xaml</DependentUpon>
     </Compile>
