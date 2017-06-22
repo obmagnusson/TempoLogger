@@ -90,7 +90,7 @@ namespace TempoLogger
 
 		private bool Validate()
 		{
-			const string issueRegex = @"^[[A-Za-z]+\-[0-9]+$";
+			const string issueRegex = @"^[[A-Za-z0-9]+\-[0-9]+$";
 			const string timeRegex = @"^[0-9][0-9]?:[0-9]{2}$";
 			//var durationRegex = @"^(([0-9]+)h)?\s*(([0-9]+)m)?$";
 

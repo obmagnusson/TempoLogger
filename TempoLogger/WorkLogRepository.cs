@@ -15,17 +15,25 @@ namespace TempoLogger
 
 		public WorkLogRepository()
 		{
-			// Create a new serializer
-			var serializer = new XmlSerializer(typeof(List<WorkLog>));
+			try
+			{
+				// Create a new serializer
+				var serializer = new XmlSerializer(typeof(List<WorkLog>));
 
-			// Create a StreamReader
-			TextReader reader = new StreamReader("logs.xml");
+				// Create a StreamReader
+				// TODO check if file exists
+				TextReader reader = new StreamReader("logs.xml");
 
-			// Deserialize the file
-			_logs = (List<WorkLog>)serializer.Deserialize(reader);
+				// Deserialize the file
+				_logs = (List<WorkLog>)serializer.Deserialize(reader);
 
-			// Close the reader
-			reader.Close();
+				// Close the reader
+				reader.Close();
+			}
+			catch (Exception)
+			{
+				_logs = new List<WorkLog>();
+			}
 		}
 
 		public List<WorkLog> GetByDate(DateTime date)
