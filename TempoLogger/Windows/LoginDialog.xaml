@@ -4,7 +4,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d"
-		Title="LoginDialog" Height="135.381" Width="300">
+		Title="LoginDialog" Height="135.381" Width="300" Loaded="Window_Loaded">
 	<Grid>
 		<Label Content="Username:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.185,-0.958"/>
 		<TextBox Name="TxtUsername" HorizontalAlignment="Left" Height="23" Margin="81,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="201"/>

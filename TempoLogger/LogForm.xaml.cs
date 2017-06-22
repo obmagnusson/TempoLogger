@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TempoLogger.Helpers;
 using TempoLogger.Models;
 
@@ -20,15 +10,28 @@ namespace TempoLogger
 	/// <summary>
 	/// Interaction logic for LogForm.xaml
 	/// </summary>
-	public partial class LogForm : Window
+	public partial class LogForm
 	{
 		public WorkLog Model { get; set; }
-		public LogForm(WorkLog edit = null)
+
+		public LogForm(WorkLog edit)
 		{
 			InitializeComponent();
 
-			Model = edit ?? new WorkLog {Date = DateTime.Now.Date};
+			Model = edit;
+			Init();
+		}
 
+		public LogForm(DateTime date)
+		{
+			InitializeComponent();
+
+			Model = new WorkLog { Date = date };
+			Init();
+		}
+
+		private void Init()
+		{
 			TxtIssue.Text = Model.Issue;
 			DpDate.SelectedDate = Model.Date;
 			TxtStart.Text = Model.Start;
@@ -36,6 +39,14 @@ namespace TempoLogger
 			TxtDuration.Text = WorkLogHelper.SecondsToString(Model.DurationSeconds);
 			TxtComment.Text = Model.Comment;
 			SetTxtDuration();
+			TxtIssue.Focus();
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			var mainWindow = Application.Current.MainWindow;
+			Left = mainWindow.Left + (mainWindow.Width - ActualWidth) / 2;
+			Top = mainWindow.Top + (mainWindow.Height - ActualHeight) / 2;
 		}
 
 		/// <summary>

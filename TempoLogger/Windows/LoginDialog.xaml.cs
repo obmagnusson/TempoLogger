@@ -20,6 +20,13 @@ namespace TempoLogger.Windows
 			TxtPassword.KeyDown += TextBox_OnEnter;
 		}
 
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			var mainWindow = Application.Current.MainWindow;
+			Left = mainWindow.Left + (mainWindow.Width - ActualWidth) / 2;
+			Top = mainWindow.Top + (mainWindow.Height - ActualHeight) / 2;
+		}
+
 		private void BtnSave_Click(object sender, RoutedEventArgs e)
 		{
 			Submit();
