@@ -116,22 +116,22 @@
 					<GridViewColumn Header="To" Width="50" DisplayMemberBinding="{Binding End}" />
 					<GridViewColumn Header="Duration" Width="70" DisplayMemberBinding="{Binding DurationString}" />
 
-				
-					
+
+
 				</GridView>
 			</ListView.View>
 		</ListView>
-		<Label Content="Total:" Margin="0,0,80,12" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Width="47" FontSize="16"/>
-		<Label Name="LblCurrentDayTotal" Content="0m" Margin="628,0,10,12" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="16"/>
+		<Label Content="Total:" Margin="0,0,152,12" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Width="47" FontSize="16"/>
+		<Label Name="LblCurrentDayTotal" Content="0m" Margin="0,0,97,12" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="16"/>
 		<Button Name="BtnPrev" Content="&lt;&lt;" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" Width="40" Click="BtnPrev_Click"/>
 		<Button Name="BtnToday" Content="Today" HorizontalAlignment="Left" Margin="55,19,0,0" VerticalAlignment="Top" Width="75" Click="BtnToday_Click"/>
 		<Button Name="BtnNext" Content="&gt;&gt;" HorizontalAlignment="Left" Margin="135,19,0,0" VerticalAlignment="Top" Width="40" Click="BtnNext_Click"/>
 		<Label Name="LblDate"  Content="Date" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="16"/>
 
 
-		<Button Name="BtnNewLog" Content="New Log" HorizontalAlignment="Right" Margin="0,51,10,0" VerticalAlignment="Top" Width="75" Click="BtnNewLog_Click"/>
-		
-		<Button Name="BtnEditLog" Content="Edit" HorizontalAlignment="Right" Margin="0,76,10,0" VerticalAlignment="Top" Width="75" Click="BtnEditLog_Click">
+		<Button Name="BtnNewLog" Content="New Log" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Bottom" Width="110" Click="BtnNewLog_Click" FontSize="18"/>
+
+		<Button Name="BtnEditLog" Content="Edit" HorizontalAlignment="Right" Margin="0,52,10,0" VerticalAlignment="Top" Width="75" Click="BtnEditLog_Click">
 			<Button.Style>
 				<Style>
 					<Style.Triggers>
@@ -144,8 +144,8 @@
 				</Style>
 			</Button.Style>
 		</Button>
-		
-		<Button Name="BtnDeleteLog" Content="Delete" HorizontalAlignment="Right" Margin="0,102,10,0" VerticalAlignment="Top" Width="75" Click="BtnDeleteLog_Click">
+
+		<Button Name="BtnDeleteLog" Content="Delete" HorizontalAlignment="Right" Margin="0,78,10,0" VerticalAlignment="Top" Width="75" Click="BtnDeleteLog_Click">
 			<Button.Style>
 				<Style>
 					<Style.Triggers>
@@ -158,9 +158,9 @@
 				</Style>
 			</Button.Style>
 		</Button>
-		
+
 		<Label Name="LblSaving" Content="Saving" HorizontalAlignment="Right" Margin="0,17,10,0" VerticalAlignment="Top" FontSize="10" HorizontalContentAlignment="Right" Visibility="Hidden"/>
-		
-		<Button Name="BtnPostWorkLogs" Content="Post Worklogs"  HorizontalAlignment="Center" Margin="0,446,0,0" VerticalAlignment="Top" Width="128" FontSize="18" Click="BtnPostWorkLogs_Click"/>
+
+		<Button Name="BtnPostWorkLogs" Content="Post"  HorizontalAlignment="Right" Margin="0,0,10,52" VerticalAlignment="Bottom" Width="75" Click="BtnPostWorkLogs_Click"/>
 	</Grid>
 </Window>
