@@ -79,7 +79,7 @@ namespace TempoLogger
 		/// </summary>
 		private void LoadSelectedDay()
 		{
-			_logs = _repo.GetByDate(_selectedDate);
+			_logs = _repo.GetByDate(_selectedDate).OrderBy(x => x.Start).ToList();
 			Logs.ItemsSource = _logs;
 			CalculateDayTotal();
 			LblDate.Content = _selectedDate.ToString("d.M.yyyy");
