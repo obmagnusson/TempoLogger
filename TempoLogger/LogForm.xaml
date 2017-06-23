@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TempoLogger"
         mc:Ignorable="d"
-        Title="LogForm" Height="385.359" Width="300">
+        Title="LogForm" Height="385.359" Width="300" Loaded="Window_Loaded">
 	<Grid>
 		<Label Content="Issue Number" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
 		<TextBox Name="TxtIssue" HorizontalAlignment="Left" Height="23" Margin="13,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"  FontSize="16" KeyDown="Txt_HandleKeyDown"/>

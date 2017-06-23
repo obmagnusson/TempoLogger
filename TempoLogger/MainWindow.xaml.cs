@@ -92,7 +92,7 @@ namespace TempoLogger
 		/// <param name="e"></param>
 		private void BtnNewLog_Click(object sender, RoutedEventArgs e)
 		{
-			var logform = new LogForm();
+			var logform = new LogForm(_selectedDate);
 			var success = logform.ShowDialog() ?? false;
 
 			if (!success) return;
