@@ -15,7 +15,7 @@ namespace TempoLogger
 	/// </summary>
 	public partial class MainWindow
 	{
-		private readonly WorkLogRepository _repo;
+		protected readonly WorkLogRepository _repo;
 		private List<WorkLog> _logs;
 		private DateTime _selectedDate;
 		public MainWindow()
@@ -101,6 +101,16 @@ namespace TempoLogger
 
 			SaveHelper();
 
+		}
+
+		private void BtnNewTracker_Click(object sender, RoutedEventArgs e)
+		{
+
+			var logform = new LogForm(DateTime.Now);
+			var tracker = new TrackerWindow(logform);
+			tracker.Show();
+			_repo.Add(logform.Model);
+			
 		}
 
 		/// <summary>

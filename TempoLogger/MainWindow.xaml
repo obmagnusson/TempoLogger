@@ -129,7 +129,8 @@
 		<Label Name="LblDate"  Content="Date" HorizontalAlignment="Center" Margin="0,12,0,0" VerticalAlignment="Top" FontSize="16"/>
 
 
-		<Button Name="BtnNewLog" Content="New Log" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Bottom" Width="110" Click="BtnNewLog_Click" FontSize="18"/>
+		<Button Name="BtnNewLog" Content="New Log" HorizontalAlignment="Center" Margin="479,0,239,15" VerticalAlignment="Bottom" Width="110" Click="BtnNewLog_Click" FontSize="18"/>
+		<Button Name="BtnNewTracker" Content="Start Tracker" HorizontalAlignment="Center" Margin="296,0,373,15" VerticalAlignment="Bottom" Width="159" Click="BtnNewTracker_Click" FontSize="18" RenderTransformOrigin="-0.999,0.683"/>
 
 		<Button Name="BtnEditLog" Content="Edit" HorizontalAlignment="Right" Margin="0,52,10,0" VerticalAlignment="Top" Width="75" Click="BtnEditLog_Click">
 			<Button.Style>

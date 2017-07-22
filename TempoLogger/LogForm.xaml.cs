@@ -117,18 +117,6 @@ namespace TempoLogger
 				return false;
 			}
 
-			if (!Regex.IsMatch(TxtStart.Text, timeRegex))
-			{
-				LblError.Content = "Start is not in correct format";
-				return false;
-			}
-
-			if (!Regex.IsMatch(TxtEnd.Text, timeRegex))
-			{
-				LblError.Content = "End is not in correct format";
-				return false;
-			}
-
 			//if (string.IsNullOrEmpty(TxtDuration.Text) ||!Regex.IsMatch(TxtDuration.Text, durationRegex))
 			//{
 			//	LblError.Content = "Duration is not in correct format";
@@ -138,6 +126,20 @@ namespace TempoLogger
 			if (string.IsNullOrEmpty(TxtComment.Text))
 			{
 				LblError.Content = "You need to write a comment";
+				return false;
+			}
+
+			if (!Regex.IsMatch(TxtStart.Text, timeRegex))
+			{
+				if (Model.SecondsLogged > 0) return true;
+				LblError.Content = "Start is not in correct format";
+				return false;
+			}
+
+			if (!Regex.IsMatch(TxtEnd.Text, timeRegex))
+			{
+				if (Model.SecondsLogged > 0) return true;
+				LblError.Content = "End is not in correct format";
 				return false;
 			}
 
@@ -187,6 +189,11 @@ namespace TempoLogger
 		{
 			var durationSeconds = WorkLogHelper.CalculateDurationSeconds(TxtStart.Text, TxtEnd.Text);
 			TxtDuration.Text = WorkLogHelper.SecondsToString(durationSeconds);
+
+			if (Model.SecondsLogged > 0)
+			{
+				TxtDuration.Text = Model.DurationString;
+			}
 		}
 	}
 }

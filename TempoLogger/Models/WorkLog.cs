@@ -12,8 +12,13 @@ namespace TempoLogger.Models
 		public string Account { get; set; }
 		public string Comment { get; set; }
 		public bool Logged { get; set; }
+		public int SecondsLogged { get; set; }
 
-		public int DurationSeconds => WorkLogHelper.CalculateDurationSeconds(Start, End);
+		public int DurationSeconds =>
+				string.IsNullOrEmpty(Start) ?
+				SecondsLogged :
+				WorkLogHelper.CalculateDurationSeconds(Start, End);
+
 		public string DurationString => WorkLogHelper.SecondsToString(DurationSeconds);
 	}
 }

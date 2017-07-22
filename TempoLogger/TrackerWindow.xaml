@@ -1,0 +1,15 @@
+﻿<Window x:Class="TempoLogger.TrackerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TempoLogger"
+        mc:Ignorable="d"
+        Title="Tempo logger tracker thingy" Height="109.322" Width="308.898" Loaded="Window_Loaded">
+	<Grid Name="MainGrid">
+		<Label Name="Timer1" Content="00:00:00" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+		<Button Name="BtnStart" Content="Start" HorizontalAlignment="Left" Margin="22,31,0,0" VerticalAlignment="Top" Width="59" Click="BtnStartTracker_Click" RenderTransformOrigin="-0.012,0.586"/>
+		<Button Name="BtnPause" Content="Pause" HorizontalAlignment="Left" Margin="218,31,0,0" VerticalAlignment="Top" Width="59" Click="BtnPauseTracker_Click" RenderTransformOrigin="-0.012,0.586"/>
+		<Button Name="BtnLog" Content="Log" HorizontalAlignment="Left" Margin="118,48,0,0" VerticalAlignment="Top" Width="60" Click="BtnLog_Click" RenderTransformOrigin="-0.012,0.586"/>
+	</Grid>
+</Window>

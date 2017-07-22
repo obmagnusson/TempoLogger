@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows.Media;
 
 namespace TempoLogger.Helpers
 {
@@ -29,6 +30,31 @@ namespace TempoLogger.Helpers
 				ret += minutes + "m";
 
 			return ret;
+		}
+
+		/// <summary>
+		/// Formats seconds to a hh:mm:ss string
+		/// </summary>
+		/// <param name="seconds"></param>
+		/// <param name="includeSeconds"></param>
+		/// <returns></returns>
+		public static string SecondsToDateString(int seconds, bool includeSeconds = true)
+		{
+			TimeSpan time = TimeSpan.FromSeconds(seconds);
+
+			string format = includeSeconds ? @"hh\:mm\:ss" : @"hh\:mm";
+
+			string str = time.ToString(format);
+			return str;
+		}
+
+		public static SolidColorBrush GetColorFromHexa(string hexaColor)
+		{
+			byte R = Convert.ToByte(hexaColor.Substring(1, 2), 16);
+			byte G = Convert.ToByte(hexaColor.Substring(3, 2), 16);
+			byte B = Convert.ToByte(hexaColor.Substring(5, 2), 16);
+			SolidColorBrush scb = new SolidColorBrush(Color.FromArgb(0xFF, R, G, B));
+			return scb;
 		}
 
 		/// <summary>
